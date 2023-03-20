@@ -13,6 +13,24 @@ export default function TextForm(props) {
     setText(newText);
   };
 
+  const handleClear = () => {
+    // console.log("UpperCase clicked" + text);
+    let newText = "";
+    setText(newText);
+  };
+
+  const handleCopy = () => {
+    var text = document.getElementById("myBox");
+    text.select();
+    // text.setSelectionRange(0, 9999);
+    navigator.clipboard.writeText(text.value);
+  };
+
+  const handleExtraSpace = () => {
+    let newText = text.split(/[  ]+/);
+    setText(newText.join(" "));
+  };
+
   const handleOnChange = (event) => {
     // console.log("handleOnChange clicked");
     setText(event.target.value);
@@ -21,13 +39,14 @@ export default function TextForm(props) {
   const [text, setText] = useState("");
   //   text = "state update"; --> wrong
   //   setText("State updated");
+
   return (
     <>
       <div>
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
-            className="form-control"
+            className="form-control border border-secondary"
             id="myBox"
             rows="8"
             value={text}
@@ -45,6 +64,18 @@ export default function TextForm(props) {
           onClick={handleLowClick}
         >
           LowerCase
+        </button>
+        <button
+          className="btn btn-outline-success mx-2"
+          onClick={handleExtraSpace}
+        >
+          Remove ExtraSpace
+        </button>
+        <button className="btn btn-outline-success mx-2" onClick={handleCopy}>
+          CopyText
+        </button>
+        <button className="btn btn-outline-success mx-2" onClick={handleClear}>
+          Clear
         </button>
       </div>
 

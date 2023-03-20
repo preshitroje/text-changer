@@ -2,6 +2,7 @@ import "./App.css";
 import TextForm from "./components/TextForm";
 
 import Navbar from "./components/Navbar";
+import About from "./components/About";
 // const name = "preshit";
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <div className="container my-3">
         <TextForm heading="Enter Text to Utilise" />
       </div>
-
+      {/* <About /> */}
       {/* <Navbar /> */}
     </>
   );
