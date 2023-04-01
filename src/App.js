@@ -3,7 +3,15 @@ import TextForm from "./components/TextForm";
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
-// import About from "./components/About";
+import About from "./components/About";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
+
 // const name = "preshit";
 function App() {
   const [mode, setMode] = useState("light");
@@ -33,20 +41,34 @@ function App() {
 
   return (
     <>
-      <Navbar
-        title="Textutils"
-        aboutText="About us"
-        mode={mode}
-        toggleMode={toggleMode}
-      />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <TextForm
-          heading="Enter Text to Utilise"
-          mode={mode}
-          showAlert={showAlert}
-        />
+      <div className="container">
+        <Router>
+          <Navbar
+            title="TextUtils"
+            mode={mode}
+            aboutText="About us"
+            toggleMode={toggleMode}
+            // toggleMode={handleOnChange}
+          />
+          <Alert alert={alert} />
+          <div className="container my-3">
+            <Routes>
+              <Route exact path="/about" element={<About />} />
+              <Route
+                exact
+                path="/"
+                element={
+                  <TextForm
+                    heading="Enter the text to analyze below"
+                    showAlert={showAlert}
+                  />
+                }
+              />
+            </Routes>
+          </div>
+        </Router>
       </div>
+
       {/* <About /> */}
       {/* <Navbar /> */}
     </>

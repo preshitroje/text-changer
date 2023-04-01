@@ -53,7 +53,14 @@ export default function TextForm(props) {
           color: props.mode === "dark" ? "white" : "black",
         }}
       >
-        <h1>{props.heading}</h1>
+        <h1
+          className="container"
+          style={{
+            color: props.mode === "dark" ? "white" : "#808080",
+          }}
+        >
+          {props.heading}
+        </h1>
         <div className="mb-3">
           <textarea
             className="form-control border border-secondary"
@@ -68,27 +75,38 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         <button
-          className="btn btn-outline-success mx-2"
+          disabled={text.length === 0}
+          className="btn btn-outline-success mx-2 my-2"
           onClick={handleUpClick}
         >
           UpperCase
         </button>
         <button
-          className="btn btn-outline-success mx-2"
+          disabled={text.length === 0}
+          className="btn btn-outline-success mx-2 my-2"
           onClick={handleLowClick}
         >
           LowerCase
         </button>
         <button
-          className="btn btn-outline-success mx-2"
+          disabled={text.length === 0}
+          className="btn btn-outline-success mx-2 my-2"
           onClick={handleExtraSpace}
         >
           Remove ExtraSpace
         </button>
-        <button className="btn btn-outline-success mx-2" onClick={handleCopy}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-outline-success mx-2 my-2"
+          onClick={handleCopy}
+        >
           CopyText
         </button>
-        <button className="btn btn-outline-success mx-2" onClick={handleClear}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-outline-success mx-2 my-2"
+          onClick={handleClear}
+        >
           Clear
         </button>
       </div>
@@ -96,14 +114,26 @@ export default function TextForm(props) {
       <div
         className="container my-3"
         style={{
-          color: props.mode === "dark" ? "white" : "black",
+          color: props.mode === "dark" ? "white" : "#808080",
         }}
       >
         <h1>Text Summary</h1>
         <p>
-          {text.split(" ").length} Words and {text.length} characters{" "}
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          Words and {text.length} characters{" "}
         </p>
-        <p>Time {0.008 * text.split(" ").length} Minites to Read</p>
+        <p>
+          Time{" "}
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          Minites to Read
+        </p>
         <h3>Privew</h3>
         <p>{text.length > 0 ? text : "Enter text to privew....."}</p>
       </div>
