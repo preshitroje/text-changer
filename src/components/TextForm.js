@@ -5,18 +5,21 @@ export default function TextForm(props) {
     // console.log("UpperCase clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("All characters chaged to UPPERCASE", "success");
   };
 
   const handleLowClick = () => {
     // console.log("UpperCase clicked" + text);
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("All characters chaged to LOWERCASE", "success");
   };
 
   const handleClear = () => {
     // console.log("UpperCase clicked" + text);
     let newText = "";
     setText(newText);
+    props.showAlert("TextArea Cleared", "success");
   };
 
   const handleCopy = () => {
@@ -24,11 +27,13 @@ export default function TextForm(props) {
     text.select();
     // text.setSelectionRange(0, 9999);
     navigator.clipboard.writeText(text.value);
+    props.showAlert("Copiped to Clipboard", "success");
   };
 
   const handleExtraSpace = () => {
     let newText = text.split(/[  ]+/);
     setText(newText.join(" "));
+    props.showAlert("All Extra Space Removed", "success");
   };
 
   const handleOnChange = (event) => {
@@ -42,7 +47,12 @@ export default function TextForm(props) {
 
   return (
     <>
-      <div>
+      <div
+        className="container"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
@@ -51,6 +61,10 @@ export default function TextForm(props) {
             rows="8"
             value={text}
             onChange={handleOnChange}
+            style={{
+              backgroundColor: props.mode === "dark" ? "#212529" : "white",
+              color: props.mode === "dark" ? "white" : "black",
+            }}
           ></textarea>
         </div>
         <button
@@ -79,14 +93,19 @@ export default function TextForm(props) {
         </button>
       </div>
 
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
         <h1>Text Summary</h1>
         <p>
           {text.split(" ").length} Words and {text.length} characters{" "}
         </p>
         <p>Time {0.008 * text.split(" ").length} Minites to Read</p>
         <h3>Privew</h3>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Enter text to privew....."}</p>
       </div>
     </>
   );
