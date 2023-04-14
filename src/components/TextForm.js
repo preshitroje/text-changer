@@ -81,6 +81,14 @@ export default function TextForm(props) {
         >
           UpperCase
         </button>
+        <a
+          className="btn btn-outline-success mx-2 my-2"
+          href="https://speak-for-text.netlify.app/"
+        >
+          {/* <button>voice-text</button> */}
+          {/* <FontAwesomeIcon icon="fa-regular fa-microphone" /> */}
+          <i class="fa-regular fa-microphone">Voice To Text</i>
+        </a>
         <button
           disabled={text.length === 0}
           className="btn btn-outline-success mx-2 my-2"
@@ -140,3 +148,4 @@ export default function TextForm(props) {
     </>
   );
 }
+
